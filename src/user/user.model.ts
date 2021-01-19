@@ -3,9 +3,8 @@ import {
   BelongsToManyGetAssociationsMixin,
   DataTypes,
   Model,
+  Sequelize,
 } from 'sequelize';
-
-import { db } from '../db';
 
 import { IUser } from '../../../global';
 
@@ -25,18 +24,20 @@ export class User extends Model<IUser> implements IUser {
   public readonly deletedAt!: Date;
 }
 
-User.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+export const initUser = (sequelize: Sequelize) => {
+  User.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
+      name: { type: DataTypes.STRING },
     },
-    name: { type: DataTypes.STRING },
-  },
-  {
-    sequelize: db.sequelize,
-    paranoid: true,
-    timestamps: true,
-  },
-);
+    {
+      sequelize: sequelize,
+      paranoid: true,
+      timestamps: true,
+    },
+  );
+};

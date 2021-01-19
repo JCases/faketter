@@ -1,5 +1,6 @@
 import { Sequelize, SyncOptions } from 'sequelize';
 
+import { createModels } from './createModels';
 import { setAssociations } from './associations';
 import { setDefaultValues } from './defaultValues';
 
@@ -12,7 +13,7 @@ import {
 } from '../app.constants';
 
 class DB {
-  public sequelize!: Sequelize;
+  public sequelize: Sequelize;
   public readonly options: SyncOptions = {
     force: true,
   };
@@ -22,17 +23,14 @@ class DB {
   }
 
   public async init() {
-    this.setAssociations();
+    createModels(this.sequelize);
+    setAssociations();
     await this.sequelize.sync(this.options);
     await this.createDefaultValues();
   }
 
   public async createDefaultValues() {
     await setDefaultValues();
-  }
-
-  private setAssociations() {
-    setAssociations();
   }
 
   private setSequelize() {

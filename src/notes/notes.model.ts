@@ -1,6 +1,9 @@
-import { BelongsToManyGetAssociationsMixin, DataTypes, Model } from 'sequelize';
-
-import { db } from '../db';
+import {
+  BelongsToManyGetAssociationsMixin,
+  DataTypes,
+  Model,
+  Sequelize,
+} from 'sequelize';
 
 import { INotes } from '../../../global';
 
@@ -16,18 +19,20 @@ export class Notes extends Model<INotes> implements INotes {
   public readonly deletedAt!: Date;
 }
 
-Notes.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+export const initNotes = (sequelize: Sequelize) => {
+  Notes.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
+      text: { type: DataTypes.STRING },
     },
-    text: { type: DataTypes.STRING },
-  },
-  {
-    sequelize: db.sequelize,
-    paranoid: true,
-    timestamps: true,
-  },
-);
+    {
+      sequelize: sequelize,
+      paranoid: true,
+      timestamps: true,
+    },
+  );
+};
