@@ -7,15 +7,18 @@ import {
 
 import { db } from '../db';
 
-import { Notes } from '../notes/notes.model';
-
 import { IUser } from '../../../global';
+
+import { Notes } from 'src/notes/notes.model';
 
 export class User extends Model<IUser> implements IUser {
   public name!: string;
 
-  public addNotes!: BelongsToManyAddAssociationsMixin<Notes, string>;
+  public addNote!: BelongsToManyAddAssociationsMixin<Notes, string>;
   public getNotes!: BelongsToManyGetAssociationsMixin<Notes>;
+
+  public addFavoriteNote!: BelongsToManyAddAssociationsMixin<Notes, string>;
+  public getFavoritesNotes!: BelongsToManyGetAssociationsMixin<Notes>;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

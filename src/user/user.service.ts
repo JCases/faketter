@@ -1,5 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { IUser } from '../../../global';
+import { Injectable } from '@nestjs/common';
 import { User } from './user.model';
 
 @Injectable()
