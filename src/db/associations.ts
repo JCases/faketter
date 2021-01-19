@@ -8,7 +8,7 @@ export const setAssociations = () => {
   });
   Notes.belongsToMany(User, {
     through: 'UserNotes',
-    foreignKey: 'userFavoriteID',
+    foreignKey: 'notesFavoriteID',
   });
 
   User.hasMany(Notes, { foreignKey: 'userID' });

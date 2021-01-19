@@ -37,6 +37,7 @@ class DB {
     try {
       this.sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
         host: DB_HOST,
+        storage: 'database.sqlite',
         dialect: DB_DIALECT,
         pool: {
           max: 20,

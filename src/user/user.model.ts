@@ -1,7 +1,9 @@
 import {
-  BelongsToManyAddAssociationsMixin,
   BelongsToManyGetAssociationsMixin,
+  BelongsToManySetAssociationsMixin,
   DataTypes,
+  HasManyAddAssociationMixin,
+  HasManyGetAssociationsMixin,
   Model,
   Sequelize,
 } from 'sequelize';
@@ -13,10 +15,10 @@ import { Notes } from 'src/notes/notes.model';
 export class User extends Model<IUser> implements IUser {
   public name!: string;
 
-  public addNote!: BelongsToManyAddAssociationsMixin<Notes, string>;
-  public getNotes!: BelongsToManyGetAssociationsMixin<Notes>;
+  public addNote!: HasManyAddAssociationMixin<Notes, Notes>;
+  public getNotes!: HasManyGetAssociationsMixin<Notes>;
 
-  public addFavoriteNote!: BelongsToManyAddAssociationsMixin<Notes, string>;
+  public addFavoriteNote!: BelongsToManySetAssociationsMixin<Notes, Notes>;
   public getFavoritesNotes!: BelongsToManyGetAssociationsMixin<Notes>;
 
   public readonly createdAt!: Date;
@@ -32,7 +34,7 @@ export const initUser = (sequelize: Sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      name: { type: DataTypes.STRING },
+      name: { type: DataTypes.STRING, unique: true },
     },
     {
       sequelize: sequelize,
