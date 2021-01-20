@@ -12,8 +12,11 @@ export class UserController {
   }
 
   @Get('get-user-note/:id')
-  public async getUserNote(@Param('id') id: string, @Body() body: string) {
-    return this.userService.getUserNote(id, body);
+  public async getUserNote(
+    @Param('id') id: string,
+    @Body() body: { text: string },
+  ) {
+    return this.userService.getUserNote(id, body.text);
   }
 
   @Get('favourites-notes/:id')

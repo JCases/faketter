@@ -1,4 +1,4 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
 import { NotesService } from './notes.service';
 
@@ -11,8 +11,8 @@ export class NotesController {
     return this.notesService.getNotes();
   }
 
-  @Get('get-specific-notes')
-  public async getSpecificNotes(@Body() body: string) {
-    return this.notesService.getSpecificNotes(body);
+  @Get('get-specific-notes/:text')
+  public async getSpecificNotes(@Param('text') text: string) {
+    return this.notesService.getSpecificNotes(text);
   }
 }

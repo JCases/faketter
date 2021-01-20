@@ -2,7 +2,6 @@ import {
   BelongsToManyGetAssociationsMixin,
   BelongsToManySetAssociationsMixin,
   DataTypes,
-  HasManyAddAssociationMixin,
   HasManyGetAssociationsMixin,
   Model,
   Sequelize,
@@ -15,11 +14,10 @@ import { Notes } from 'src/notes/notes.model';
 export class User extends Model<IUser> implements IUser {
   public name!: string;
 
-  public addNote!: HasManyAddAssociationMixin<Notes, Notes>;
   public getNotes!: HasManyGetAssociationsMixin<Notes>;
 
-  public addFavoriteNote!: BelongsToManySetAssociationsMixin<Notes, Notes>;
-  public getFavoritesNotes!: BelongsToManyGetAssociationsMixin<Notes>;
+  public addFavourite!: BelongsToManySetAssociationsMixin<Notes, string>;
+  public getFavourite!: BelongsToManyGetAssociationsMixin<Notes>;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

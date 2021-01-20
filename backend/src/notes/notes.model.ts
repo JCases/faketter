@@ -1,5 +1,6 @@
 import {
   BelongsToManyGetAssociationsMixin,
+  BelongsToSetAssociationMixin,
   DataTypes,
   Model,
   Sequelize,
@@ -12,7 +13,9 @@ import { User } from 'src/user/user.model';
 export class Notes extends Model<INotes> implements INotes {
   public text!: string;
 
-  public getFavoritesUsers!: BelongsToManyGetAssociationsMixin<User>;
+  public setUser!: BelongsToSetAssociationMixin<User, string>;
+
+  public getUsers!: BelongsToManyGetAssociationsMixin<User>;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

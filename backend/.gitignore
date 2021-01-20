@@ -2,9 +2,6 @@
 /dist
 /node_modules
 
-# secrets
-secret.ts
-
 # Logs
 logs
 *.log
